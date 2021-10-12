@@ -30,7 +30,7 @@ class EditProductFormType extends AbstractType
                 ]
             ])
             ->add('price', NumberType::class, [
-                'label' => 'Title',
+                'label' => 'Price',
                 'required' => true,
                 'scale' => 2,
                 'html5' => true,

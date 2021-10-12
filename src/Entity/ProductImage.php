@@ -26,7 +26,7 @@ class ProductImage
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $filenameBIG;
+    private $filenameBig;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -55,14 +55,14 @@ class ProductImage
         return $this;
     }
 
-    public function getFilenameBIG(): ?string
+    public function getFilenameBig(): ?string
     {
-        return $this->filenameBIG;
+        return $this->filenameBig;
     }
 
-    public function setFilenameBIG(string $filenameBIG): self
+    public function setFilenameBig(string $filenameBig): self
     {
-        $this->filenameBIG = $filenameBIG;
+        $this->filenameBig = $filenameBig;
 
         return $this;
     }
