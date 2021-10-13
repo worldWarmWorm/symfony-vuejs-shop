@@ -1,0 +1,3 @@
+db: ranked_choice
+user: rc_admin
+pass: rc1234

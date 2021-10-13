@@ -6,13 +6,8 @@ use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
 
-class ProductManager
+class ProductManager extends AbstractBaseManager
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    private EntityManagerInterface $entityManager;
-
     /**
      * @var string
      */
@@ -30,8 +25,7 @@ class ProductManager
      */
     public function __construct(EntityManagerInterface $entityManager, ProductImageManager $productImageManager, string $productImagesDir)
     {
-
-        $this->entityManager = $entityManager;
+        parent::__construct($entityManager);
         $this->productImagesDir = $productImagesDir;
         $this->productImageManager = $productImageManager;
     }
@@ -45,18 +39,9 @@ class ProductManager
     }
 
     /**
-     * @param Product $product
+     * @param object $product
      */
-    public function save(Product $product): void
-    {
-        $this->entityManager->persist($product);
-        $this->entityManager->flush();
-    }
-
-    /**
-     * @param Product $product
-     */
-    public function remove(Product $product): void
+    public function remove(object $product): void
     {
         $product->setIsDeleted(true);
         $this->save($product);
