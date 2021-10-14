@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use App\Form\DTO\EditProductModel;
 use App\Repository\ProductRepository;
+use App\Utils\Manager\ProductManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
