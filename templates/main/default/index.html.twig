@@ -100,5 +100,9 @@
                 </div>
             </div>
         </div>
+
+        {{ render(controller('App\\Controller\\EmbedController::showLastProducts', {
+            'productCount': 4
+        })) }}
     </div>
 {% endblock %}
