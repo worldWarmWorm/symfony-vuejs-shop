@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Main;
 
-use App\Form\ProfileEditFormType;
+use App\Form\Main\ProfileEditFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +15,7 @@ class ProfileController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('main/profile/show.html.twig', [
+        return $this->render('main/profile/index.html.twig', [
             'controller_name' => 'ProfileController',
         ]);
     }
