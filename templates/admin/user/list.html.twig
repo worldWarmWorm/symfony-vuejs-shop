@@ -31,6 +31,8 @@
               <td>
                 {% if "ROLE_ADMIN" in user.roles %}
                   <strong>Admin</strong>
+                {% elseif "ROLE_SUPER_ADMIN" in user.roles %}
+                  <strong>Super Admin</strong>
                 {% else %}
                   User
                 {% endif %}<br>
