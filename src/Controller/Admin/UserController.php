@@ -3,10 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
-use App\Form\DTO\EditCategoryModel;
-use App\Form\Admin\EditCategoryFormType;
-use App\Form\Handler\CategoryFormHandler;
-use App\Repository\CategoryRepository;
+use App\Entity\User;
+use App\Form\Admin\EditUserFormType;
+use App\Form\Handler\UserFormHandler;
 use App\Repository\UserRepository;
 use App\Utils\Manager\CategoryManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,28 +34,33 @@ class UserController extends AbstractController
    * @Route("/edit/{id}", name="edit")
    * @Route("/add", name="add")
    */
-  public function edit(Request $request, CategoryFormHandler $categoryFormHandler, Category $category = null): Response
+  public function edit(Request $request, UserFormHandler $userFormHandler, User $user = null): Response
   {
-//    $editCategoryModel = EditCategoryModel::makeFromCategory($category);
-//    $form = $this->createForm(EditCategoryFormType::class, $editCategoryModel);
-//
-//    $form->handleRequest($request);
-//
-//    if ($form->isSubmitted() && $form->isValid()) {
-//      $category = $categoryFormHandler->processEditForm($editCategoryModel);
-//      $this->addFlash('success', 'Your changes were saved.');
-//
-//      return $this->redirectToRoute('admin_category_edit', [
-//        'id' => $category->getId()
-//      ]);
-//    }
-//
-//    if ($form->isSubmitted() && !$form->isValid()) {
-//      $this->addFlash('warning', 'Rejected. Please check your from!');
-//    }
+    if (!$user) {
+      $user = new User();
+    }
 
-    return $this->render('admin/category/edit.html.twig', [
-      'category' => $category,
+
+    $form = $this->createForm(EditUserFormType::class, $user);
+
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+      $user = $userFormHandler->processEditForm($form);
+
+      $this->addFlash('success', 'Your changes were saved.');
+
+      return $this->redirectToRoute('admin_user_edit', [
+        'id' => $user->getId()
+      ]);
+    }
+
+    if ($form->isSubmitted() && !$form->isValid()) {
+      $this->addFlash('warning', 'Rejected. Please check your from!');
+    }
+
+    return $this->render('admin/user/edit.html.twig', [
+      'user' => $user,
       'form' => $form->createView()
     ]);
   }
