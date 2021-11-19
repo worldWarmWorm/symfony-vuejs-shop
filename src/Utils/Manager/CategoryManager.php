@@ -8,7 +8,6 @@ use Doctrine\Persistence\ObjectRepository;
 
 class CategoryManager extends AbstractBaseManager
 {
-
     /**
      * @return ObjectRepository
      */
@@ -30,6 +29,5 @@ class CategoryManager extends AbstractBaseManager
         }
 
         $this->save($category);
-//        dd($category, $category->getProducts()->getValues());
     }
 }
