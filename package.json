@@ -1,5 +1,25 @@
 {
   "devDependencies": {
-    "prettier": "^2.4.1"
+    "@symfony/stimulus-bridge": "^2.1.0",
+    "@symfony/webpack-encore": "^1.6.1",
+    "core-js": "^3.19.1",
+    "prettier": "^2.4.1",
+    "regenerator-runtime": "^0.13.9",
+    "sass": "^1.43.4",
+    "sass-loader": "^12.3.0",
+    "stimulus": "^2.0.0",
+    "webpack-notifier": "^1.14.1"
+  },
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production --progress"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "bootstrap": "^4.3.1"
   }
 }
