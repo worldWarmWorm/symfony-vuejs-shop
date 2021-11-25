@@ -1,15 +1,31 @@
 <template>
-  <div>
-    vue app {{ productsCount }}
-  </div>
+	<div class="table-additional-selection">
+		<OrderProductAdd/>
+		<OrderProductItem
+				v-for="(orderProduct, index) in staticStore.orderProducts"
+				:key="orderProduct.id"
+				:order-product="orderProduct"
+				:index="index"
+		/>
+	</div>
 </template>
 
 <script>
-  export default {
-    computed: {
-      productsCount: () => {
-        return 123;
-      }
-    }
-  }
+import {mapActions, mapState} from "vuex";
+import OrderProductItem from "./components/OrderProductItem";
+import OrderProductAdd from "./components/OrderProductAdd";
+
+
+export default {
+	components: {OrderProductAdd, OrderProductItem},
+	created() {
+		this.getCategories();
+	},
+	computed: {
+		...mapState("products", ["staticStore"])
+	},
+	methods: {
+		...mapActions("products", ["getCategories"])
+	}
+}
 </script>
