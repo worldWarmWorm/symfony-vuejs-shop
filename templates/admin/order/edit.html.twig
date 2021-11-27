@@ -123,11 +123,11 @@
   <script>
     window.staticStore = {
       orderId: "{{ order ? order.id : '' }}",
-      orderProducts: {{ orderProducts|json_encode|raw }},
       urlViewProduct: '{{ path('admin_product_edit_blank') }}',
       urlAPICategory: '{{ path('api_categories_get_collection') }}',
       urlAPIOrderProduct: '{{ path('api_order_products_get_collection') }}',
       urlAPIProduct: '{{ path('api_products_get_collection') }}',
+      urlAPIOrder: '{{ path('api_orders_get_collection') }}',
     };
   </script>
   {{ encore_entry_script_tags('appAdminOrder') }}

@@ -7,6 +7,8 @@ const store = window.staticStore;
 const state = () => ({
   categories: [],
   categoryProducts: [],
+  orderProducts: [],
+  busyProductsIds: [],
   newOrderProduct: {
     categoryId: "",
     productId: "",
@@ -15,20 +17,49 @@ const state = () => ({
   },
   staticStore: {
     orderId: store.orderId,
-    orderProducts: store.orderProducts,
     url: {
       viewProduct: store.urlViewProduct,
       apiOrderProduct: store.urlAPIOrderProduct,
       apiCategory: store.urlAPICategory,
-      apiProduct: store.urlAPIProduct
+      apiProduct: store.urlAPIProduct,
+      apiOrder: store.urlAPIOrder
     }
   },
   viewProductCountLimit: 25
 });
 
-const getters = {}
+const getters = {
+  freeCategoryProducts(state) {
+    return state.categoryProducts.filter(
+      item => state.busyProductsIds.indexOf(item.id) === -1
+    );
+  }
+}
 
 const actions = {
+  async getOrderProducts({commit, state}) {
+    const url = concatUrlByParams(state.staticStore.url.apiOrder, state.staticStore.orderId);
+    const result = await axios.get(url, apiConfig);
+
+    if (result.data && result.status === StatusCodes.OK) {
+      commit('setOrderProducts', result.data.orderProducts);
+      commit('setBusyProductsIds');
+    }
+  },
+  async addNewOrderProduct({state, dispatch}) {
+    const url = state.staticStore.url.apiOrderProduct;
+    const data = {
+      pricePerOne: state.newOrderProduct.pricePerOne,
+      quantity: parseInt(state.newOrderProduct.quantity),
+      product: "/api/products/" + state.newOrderProduct.productId,
+      appOrder: "/api/orders/" + state.staticStore.orderId
+    }
+    const result = await axios.post(url, data, apiConfig);
+
+    if (result.data && result.status === StatusCodes.CREATED) {
+      dispatch("getOrderProducts");
+    }
+  },
   async getProductByCategory({commit, state}) {
     const url = getUrlProductsByCategory(
       state.staticStore.url.apiProduct,
@@ -55,7 +86,7 @@ const actions = {
     const result = await axios.delete(url, apiConfig);
 
     if (result.status === StatusCodes.NO_CONTENT) {
-      console.log('Deleted');
+      dispatch("getOrderProducts");
     }
   }
 }
@@ -72,6 +103,12 @@ const mutations = {
     state.newOrderProduct.productId = formData.productId;
     state.newOrderProduct.quantity = formData.quantity;
     state.newOrderProduct.pricePerOne = formData.pricePerOne;
+  },
+  setOrderProducts(state, orderProducts) {
+    state.orderProducts = orderProducts;
+  },
+  setBusyProductsIds(state) {
+    state.busyProductsIds = state.orderProducts.map(item => item.product.id);
   }
 }
 

@@ -2,11 +2,12 @@
 	<div class="table-additional-selection">
 		<OrderProductAdd/>
 		<OrderProductItem
-				v-for="(orderProduct, index) in staticStore.orderProducts"
+				v-for="(orderProduct, index) in orderProducts"
 				:key="orderProduct.id"
 				:order-product="orderProduct"
 				:index="index"
 		/>
+		<TotalPriceBlock/>
 	</div>
 </template>
 
@@ -14,18 +15,20 @@
 import {mapActions, mapState} from "vuex";
 import OrderProductItem from "./components/OrderProductItem";
 import OrderProductAdd from "./components/OrderProductAdd";
+import TotalPriceBlock from "./components/TotalPriceBlock";
 
 
 export default {
-	components: {OrderProductAdd, OrderProductItem},
+	components: {TotalPriceBlock, OrderProductAdd, OrderProductItem},
 	created() {
 		this.getCategories();
+		this.getOrderProducts();
 	},
 	computed: {
-		...mapState("products", ["staticStore"])
+		...mapState("products", ["orderProducts"])
 	},
 	methods: {
-		...mapActions("products", ["getCategories"])
+		...mapActions("products", ["getCategories", "getOrderProducts"])
 	}
 }
 </script>

@@ -1,27 +1,29 @@
 <template>
-  <div class="row mb-1 mt-1">
-	  <hr>
-    <div class="col-md-1 justify-content-center align-items-center d-flex">
-      {{ rowNumber }}
-    </div>
-    <div class="col-md-3 align-items-center d-flex">
-			{{ productTitle }}
-    </div>
-    <div class="col-md-2 align-items-center d-flex">
-	    {{ categoryTitle }}
-    </div>
-    <div class="col-md-1 align-items-center d-flex">
-			{{ orderProduct.quantity }}
-    </div>
-    <div class="col-md-2 align-items-center d-flex">
-			${{ orderProduct.pricePerOne }}
-    </div>
-    <div class="col-md-3 align-items-center d-flex">
-	    <button class="btn btn-outline-info mr-1" @click="viewDetails">Details</button>
-	    <button class="btn btn-outline-success" @click="remove">Remove</button>
-    </div>
-	  <hr>
-  </div>
+	<div>
+		<hr>
+		<div class="row mb-1 mt-1">
+			<div class="col-md-1 justify-content-center align-items-center d-flex">
+				{{ rowNumber }}
+			</div>
+			<div class="col-md-3 align-items-center d-flex">
+				{{ productTitle }}
+			</div>
+			<div class="col-md-2 align-items-center d-flex">
+				{{ categoryTitle }}
+			</div>
+			<div class="col-md-1 align-items-center d-flex">
+				{{ orderProduct.quantity }}
+			</div>
+			<div class="col-md-2 align-items-center d-flex">
+				${{ orderProduct.pricePerOne }}
+			</div>
+			<div class="col-md-3 align-items-center d-flex">
+				<button class="btn btn-outline-info mr-1" @click="viewDetails">Details</button>
+				<button class="btn btn-outline-success" @click="remove">Remove</button>
+			</div>
+		</div>
+		<hr>
+	</div>
 </template>
 
 <script>
