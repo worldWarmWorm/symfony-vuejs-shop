@@ -35,9 +35,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *       "normalization_context"={"groups"="product:item:write"}
  *     }
  *   },
- *   order={
- *     "id"="DESC"
- *   },
+ *   order={"id"="DESC"},
  *   attributes={
  *     "pagination_client_items_per_page"=true,
  *     "formats"={"jsonld", "json"}
@@ -45,9 +43,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *   paginationEnabled=true
  * )
  * @ApiFilter(BooleanFilter::class, properties={"isPublished"})
- * @ApiFilter(SearchFilter::class, properties={
- *   "category": "exact"
- * })
+ * @ApiFilter(SearchFilter::class, properties={"category": "exact"})
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
 class Product
@@ -56,38 +52,78 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     *
      * @ApiProperty(identifier=false)
-     * @Groups({"product:list", "order:item"})
+     * @Groups({
+     *   "product:list",
+     *   "order:item",
+     *   "cart_product:list",
+     *   "cart_product:item",
+     *   "cart:list",
+     *   "cart:item"
+     * })
      */
     private $id;
 
     /**
      * @ORM\Column(type="uuid")
-     *
      * @ApiProperty(identifier=true)
-     * @Groups({"product:list", "product:item", "order:item"})
+     * @Groups({
+     *   "product:list",
+     *   "product:item",
+     *   "order:item",
+     *   "cart_product:list",
+     *   "cart_product:item",
+     *   "cart:list",
+     *   "cart:item"
+     * })
      */
     private $uuid;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
-     * @Groups({"product:list", "product:item", "product:list:write", "product:item:write", "order:item"})
+     * @Groups({
+     *   "product:list",
+     *   "product:item",
+     *   "product:list:write",
+     *   "product:item:write",
+     *   "order:item",
+     *   "cart_product:list",
+     *   "cart_product:item",
+     *   "cart:list",
+     *   "cart:item"
+     * })
      */
     private $title;
 
     /**
      * @ORM\Column(type="decimal", precision=6, scale=2)
-     *
-     * @Groups({"product:list", "product:item", "product:list:write", "product:item:write", "order:item"})
+     * @Groups({
+     *   "product:list",
+     *   "product:item",
+     *   "product:list:write",
+     *   "product:item:write",
+     *   "order:item",
+     *   "cart_product:list",
+     *   "cart_product:item",
+     *   "cart:list",
+     *   "cart:item
+     * "})
      */
     private $price;
 
     /**
      * @ORM\Column(type="integer")
-     *
-     * @Groups({"product:list", "product:item", "product:list:write", "product:item:write", "order:item"})
+     * @Groups({
+     *   "product:list",
+     *   "product:item",
+     *   "product:list:write",
+     *   "product:item:write",
+     *   "order:item",
+     *   "cart_product:list",
+     *   "cart_product:item",
+     *   "cart:list",
+     *   "cart:item"
+     * })
      */
     private $quantity;
 
@@ -124,8 +160,17 @@ class Product
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
-     *
-     * @Groups({"product:list", "product:item", "product:list:write", "product:item:write", "order:item"})
+     * @Groups({
+     *   "product:list",
+     *   "product:item",
+     *   "product:list:write",
+     *   "product:item:write",
+     *   "order:item",
+     *   "cart_product:list",
+     *   "cart_product:item",
+     *   "cart:list",
+     *   "cart:item"
+     * })
      */
     private $category;
 

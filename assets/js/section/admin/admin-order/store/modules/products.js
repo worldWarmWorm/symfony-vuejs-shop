@@ -2,8 +2,8 @@ import {concatUrlByParams, getUrlProductsByCategory} from "../../../../../utils/
 import axios from "axios";
 import {StatusCodes} from "http-status-codes";
 import {apiConfig} from "../../../../../utils/settings";
+import {store} from "../../../../../utils/window-static-store";
 
-const store = window.staticStore;
 const state = () => ({
   categories: [],
   categoryProducts: [],
@@ -49,7 +49,7 @@ const actions = {
   async addNewOrderProduct({state, dispatch}) {
     const url = state.staticStore.url.apiOrderProduct;
     const data = {
-      pricePerOne: state.newOrderProduct.pricePerOne,
+      pricePerOne: state.newOrderProduct.pricePerOne.toString(),
       quantity: parseInt(state.newOrderProduct.quantity),
       product: "/api/products/" + state.newOrderProduct.productId,
       appOrder: "/api/orders/" + state.staticStore.orderId

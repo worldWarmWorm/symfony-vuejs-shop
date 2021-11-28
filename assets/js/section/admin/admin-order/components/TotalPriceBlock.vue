@@ -1,11 +1,7 @@
 <template>
-	<div class="row mb-1">
-		<div class="col-md-2 text-right font-weight-bold">
-			Total price:
-		</div>
-		<div class="col-md-10">
-			<span class="font-weight-bold">${{totalPrice}}</span>
-
+	<div class="row mb-1 mt-3">
+		<div class="col-md-12 font-weight-bold">
+			Total price: <span class="font-weight-bold">${{totalPrice}}</span>
 		</div>
 	</div>
 </template>
@@ -19,10 +15,11 @@
 			...mapState("products", ["orderProducts"]),
 			totalPrice() {
 				let totalPrice = 0;
-				this.orderProducts.forEach(orderProduct => {
-					totalPrice += parseFloat(orderProduct.pricePerOne) * orderProduct.quantity;
-				});
-
+				if (this.orderProducts) {
+					this.orderProducts.forEach(orderProduct => {
+						totalPrice += parseFloat(orderProduct.pricePerOne) * orderProduct.quantity;
+					});
+				}
 				return parseFloat(totalPrice.toFixed(2));
 			}
 		}
