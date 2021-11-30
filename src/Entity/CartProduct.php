@@ -22,7 +22,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *   itemOperations={
  *      "get"={
  *        "normalization_context"={"groups"="cart_product:item"}
- *      }
+ *      },
+ *     "delete"={},
+ *     "patch"={}
  *   }
  * )
  */

@@ -149,6 +149,12 @@ class Product
 
     /**
      * @ORM\OneToMany(targetEntity=ProductImage::class, mappedBy="product", cascade={"persist"}, orphanRemoval=true)
+     * @Groups({
+     *   "cart_product:list",
+     *   "cart_product:item",
+     *   "cart:list",
+     *   "cart:item"
+     * })
      */
     private $productImages;
 

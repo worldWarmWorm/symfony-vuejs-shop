@@ -24,7 +24,8 @@ use Doctrine\ORM\Mapping as ORM;
  *   itemOperations={
  *      "get"={
  *        "normalization_context"={"groups"="cart:item"}
- *      }
+ *      },
+ *     "delete"={}
  *   }
  * )
  */

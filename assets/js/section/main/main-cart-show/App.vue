@@ -2,11 +2,11 @@
 	<div class="row">
 		<div class="col-lg-12 order-block">
 			<div class="order-content">
+				<Notify/>
 				<div v-if="showCartContent">
 					<CartProductList/>
 					<CartTotalPrice/>
 					<a
-							href=""
 							class="btn btn-success mb-3 text-white"
 							@click="makeOrder"
 					>
@@ -21,24 +21,23 @@
 <script>
 	import CartProductList from "./components/CartProductList";
 	import CartTotalPrice from "./components/CartTotalPrice";
-	import {mapActions} from "vuex";
+	import {mapActions, mapState} from "vuex";
+	import Notify from "./components/Notify";
 
 	export default {
 		name: 'App',
-		components: {CartTotalPrice, CartProductList},
+		components: {Notify, CartTotalPrice, CartProductList},
 		created() {
 			this.getCart();
 		},
 		computed: {
+			...mapState('cart', ['cart', 'isSentForm']),
 			showCartContent() {
-				return true;
+				return !this.isSentForm && Object.keys(this.cart).length;
 			}
 		},
 		methods: {
-			...mapActions('cart', ['getCart']),
-			makeOrder() {
-				return true;
-			}
+			...mapActions('cart', ['getCart', 'makeOrder'])
 		}
 	}
 </script>
