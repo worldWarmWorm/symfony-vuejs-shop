@@ -33,7 +33,7 @@
 		computed: {
 			...mapState('cart', ['cart', 'isSentForm']),
 			showCartContent() {
-				return !this.isSentForm && Object.keys(this.cart).length ;
+				return !this.isSentForm && Object.keys(this.cart).length;
 			}
 		},
 		methods: {
